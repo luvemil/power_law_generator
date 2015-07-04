@@ -29,8 +29,10 @@ def do_stuff(data):
     plt.show()
 
 def main():
-    freq = 1 # the starting frequency
-    n = 1000 # How many
+    freq = 10 # the starting frequency
+    n = 10 # starting number of blogs
+    final = 10000 # final number of blogs
+    increm = 100 # Time different between increments in the number of blogs
     iter = 1000000 # How many iterations
 
     arr = np.array([freq for i in range(0,n)])
@@ -38,6 +40,9 @@ def main():
         cumul = arr.cumsum()
         index = choose(cumul)
         arr = increase(arr,index)
+        if i % increm == 0 and arr.size < final:
+            arr = np.resize(arr, (arr.size+1))
+            arr[arr.size - 1] = freq
         if i % 100000 == 0:
             print(i)
 
